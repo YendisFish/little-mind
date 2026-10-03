@@ -20,6 +20,8 @@ async function prompt() {
   faux.push("user", "text", msg);
   jobs.push(faux);
 
+  msg = "";
+
   let j = new LittleJob();
   jobs.push(j);
   currentJob = j;
@@ -28,9 +30,13 @@ async function prompt() {
   lttle.context.get("messages")?.push({ role: "assistant", content: j.contentToString() });
 }
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", async (e) => {
   if(e.key === "Escape") {
     currentJob?.controller.abort();
+  }
+
+  if(e.key === "Enter") {
+    await prompt();
   }
 });
 </script>

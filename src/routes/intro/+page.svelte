@@ -78,6 +78,16 @@
         await complete(lttle, job, "high");
       }
     }
+
+    document.addEventListener("keydown", async (e) => {
+      if(e.key === "Escape") {
+        final.controller.abort();
+      }
+
+      if(e.key === "Enter") {
+        await answerAndNext();
+      }
+    });
 </script>
 
 <div>
