@@ -16,6 +16,6 @@
 
 <main data-theme="dark">
     <h1 class="text-3xl" transition:fly>Welcome to Little Mind!</h1>
-    <button onclick={() => goto('/chat')}>Button</button>
-    <a href="/chat">CHAT</a>
+    <button onclick={() => goto('/chat')}>Chat</button>
+    <button onclick={() => goto('/intro')}>Intro</button>
 </main>

@@ -1,14 +1,15 @@
 <script lang="ts">
+    import { marked } from "marked";
     let props: any = $props();
 </script>
 
 <div class="max-w-[50vw] mb-2.5">
     {#each props.job.content as content}
         {#if content.type === "text"}
-          <p>{content.content}</p>
+          <p>{@html marked.parse(content.content)}</p>
         {/if}
         {#if content.type === "thinking"}
-            <p class="text-red-500">{content.content}</p>
+            <p class="text-red-500">{@html marked.parse(content.content)}</p>
         {/if}
     {/each}
 </div>

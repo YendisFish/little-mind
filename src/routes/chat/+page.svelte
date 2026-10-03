@@ -5,7 +5,6 @@ import { config, complete, LittleJob } from "$lib/little.svelte";
 import "../../css/app.css"
 
 let jobs: LittleJob[] = $state([]);
-// let job: LittleJob = $state(new LittleJob());
 let msg = $state("");
 let currentJob: LittleJob | null = null;
 

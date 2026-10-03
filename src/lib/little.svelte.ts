@@ -1,14 +1,17 @@
 import { SvelteMap } from "svelte/reactivity";
+import { grabConfig } from "./lib";
 
 type LittleConfig = {
   url: string,
   model: string,
 };
 
-export const config: LittleConfig = {
-  url: "http://localhost:11434/v1",
-  model: ""
-};
+// export const config: LittleConfig = {
+//   url: "http://localhost:11434/v1",
+//   model: ""
+// };
+
+export const config: LittleConfig = JSON.parse(await grabConfig());
 
 type LittleText = {
   role: "user" | "assistant",
@@ -73,6 +76,7 @@ export const complete = async (little: Little, job: LittleJob, reasoning: string
       reasoning_effort: reasoning,
       keep_alive: -1,
     }),
+    signal: job.controller.signal,
   });
   if (!stream.ok || !stream.body) throw new Error(`${stream.status}: ${await stream.text()}`);
 
@@ -98,4 +102,8 @@ export const complete = async (little: Little, job: LittleJob, reasoning: string
       if (delta?.content) job.push("assistant", "text", delta.content);
     }
   }
+};
+
+export const council_complete = async (little: Little, job: LittleJob[], reasoning: string) => {
+  let models = ["ornith-1.5:9b", "gemma4:12b", "tobestyledintro/qwen3.8-9b-distill:q8_0"];
 };
