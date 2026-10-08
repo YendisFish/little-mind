@@ -3,14 +3,16 @@
     import { onDestroy } from "svelte";
     import ChatBox from "../../components/ChatBox.svelte";
     import { goto, invalidateAll } from "$app/navigation";
+    import { politicalQuizQuestions, popCultureQuizQuestions } from "$lib/checkins";
 
-    let questions = [
-      "Whats your name?",
-      "What is your favorite color?",
-      "Do you like superheros, if so who?",
-      "Do you like princesses, if so which ones?",
-      "Whats your favorite movie?"
-    ];
+    // let questions = [
+    //   "Whats your name?",
+    //   "What is your favorite color?",
+    //   "Do you like superheros, if so who?",
+    //   "Do you like princesses, if so which ones?",
+    //   "Whats your favorite movie?"
+    // ];
+    let questions = popCultureQuizQuestions;
 
     let currentQuestion = $state(0);
     let answer = $state("");
@@ -48,11 +50,17 @@
           Your answer should include the following sections:
 
           - Identity: You should neatly and cleanly give a single word to describe
-          the orientation of the user, and also explain what the word means.
+          the orientation of the user, and also explain what the word means. Try and
+          stay way from 1 word descriptions of identity unless it really is one word.
+          If you can include important and specific markers then that would be very
+          helpful.
           - Peers: You should give a list of 3 people the user may agree with or
           enjoy looking into. These people should closely match the users preferences.
           Please describe how the users preferences align with those religious figures
           and also describe the figures ideology to the user.
+          - Alternative Viewpoints: You should give a list of 3 people that challenge the users position
+          and may be worth looking into. Frame this list less as a "this is why your wrong"
+          and more like a "if you enjoy looking at alternative viewpoints".
           - Breakdown: Please breakdown the users preferences from their answers and
           describe where within the spectrum they fall. Please try to avoid bias and
           only base your answer off of their own.
@@ -84,7 +92,7 @@
         final.controller.abort();
       }
 
-      if(e.key === "Enter") {
+      if(e.key === "Enter" && e.shiftKey) {
         await answerAndNext();
       }
     });

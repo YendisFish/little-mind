@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Little } from "$lib/little.svelte";
 import { config, complete, LittleJob } from "$lib/little.svelte";
-    import ChatBox from "../../components/ChatBox.svelte";
-import "../../css/app.css"
+import ChatBox from "../../../components/ChatBox.svelte";
+import "../../../css/app.css"
 
 let jobs: LittleJob[] = $state([]);
 let msg = $state("");
